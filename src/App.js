@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import { Switch, Route } from "react-router-dom"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        {/* user routes */}
+        <Route exact path="/" render={(props) => <UserHome {...props} />} />
+        <Route exact path="/login" render={(props) => <Login {...props} />} />
+        <Route exact path="/signup" render={(props) => <Signup {...props} />} />
+        <Route exact path="/settings" render={(props) => <Settings {...props} />} />
+
+        {/* card routes */}
+        <Route
+          exact
+          path="/newcard"
+          render={(props) => <NewCard {...props} />}
+        />
+        <Route
+          exact
+          path="/cards/:id/edit"
+          render={(props) => <EditCard {...props} />}
+        />
+        <Route
+          exact
+          path="/cards/:id"
+          render={(props) => <CardDetail {...props} />}
+        />
+      </Switch>
     </div>
-  );
+  )
 }
 
 export default App;
