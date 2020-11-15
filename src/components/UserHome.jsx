@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { isLoggedIn, logout } from '../services/api-auth'
 import { getCards } from '../services/api-helper'
 import CardList from './CardList'
@@ -30,6 +31,9 @@ export default function UserHome(props) {
       <div>
         Welcome to X-Effect! 
         (insert description)
+        <Link to='/newcard'>
+          <button>Add Card</button>
+        </Link>
         <CardList cards={cards} />
         <button onClick={handleClick}>Logout</button>
       </div>
