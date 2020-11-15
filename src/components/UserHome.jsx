@@ -1,9 +1,48 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { isLoggedIn, logout } from '../services/api-auth'
+import { getCards } from '../services/api-helper'
+import CardList from './CardList'
+import Login from './Login'
+import Signup from './Signup'
 
-export default function UserHome() {
-  return (
-    <div>
-      User Home
-    </div>
-  )
+export default function UserHome(props) {
+
+  const [cards, setCards] = useState([])
+
+  useEffect(() => {
+    getUserCards()
+  }, [])
+
+  const getUserCards = async () => {
+    let response = await getCards()
+    console.log(response.data)
+    setCards(response.data)
+  }
+
+  const handleClick = () => {
+    logout(() => {
+      props.history.push('/')
+    })
+  }
+
+  if (isLoggedIn()) {
+    return (
+      <div>
+        Welcome to X-Effect! 
+        (insert description)
+        <CardList cards={cards} />
+        <button onClick={handleClick}>Logout</button>
+      </div>
+    )
+
+  } else {
+    return (
+      <div>
+        Welcome to X-Effect!
+        (insert description)
+        <Login {...props} />
+        <Signup {...props} />
+      </div>
+    )
+  }
 }

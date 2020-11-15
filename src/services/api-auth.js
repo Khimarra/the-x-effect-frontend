@@ -30,7 +30,6 @@ export const handleLogin = async ({ email, password }, callback) => {
       password: password,
     })
     if (response.status === 200) {
-      console.log(api)
       api.defaults.headers.common.authorization = `Bearer ${response.data.token}`
       setUser({
         token: response.data.token,

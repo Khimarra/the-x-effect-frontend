@@ -15,7 +15,7 @@ export default function UserForm(props) {
           placeholder="password"
           onChange={props.handleChange}
         ></input>
-        <button>Login</button>
+        <button>{props.button}</button>
     </form>
   )
 }

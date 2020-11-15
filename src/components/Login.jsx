@@ -20,7 +20,7 @@ export default function Login(props) {
 
   return (
     <div>
-      <UserForm handleChange={handleChange} handleSubmit={handleSubmit} />
+      <UserForm handleChange={handleChange} handleSubmit={handleSubmit} button='Login' />
     </div>
   )
 }
