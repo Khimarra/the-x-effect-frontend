@@ -9,7 +9,7 @@ import axios from 'axios'
 let storageString = "Productivity App"
 
 export const api = axios.create({
-  baseURL: apiUrl,
+  baseURL: apiUrl
 })
 
 export const isBrowser = () => typeof window !== "undefined"
@@ -25,12 +25,13 @@ const setUser = (user) => {
 
 export const handleLogin = async ({ email, password }, callback) => {
   try {
-    let response = await axios.post(`${apiUrl}auth`, {
+    let response = await axios.post(`${apiUrl}login`, {
       email: email,
       password: password,
     })
     if (response.status === 200) {
-      api.default.headers.common.authorization = `Bearer ${response.data.token}`
+      console.log(api)
+      api.defaults.headers.common.authorization = `Bearer ${response.data.token}`
       setUser({
         token: response.data.token,
         name: response.data.name,
@@ -50,7 +51,7 @@ export const handleSignup = async ({ email, password }, callback) => {
       password: password,
     })
     if (response.status === 200) {
-      api.default.headers.common.authorization = `Bearer ${response.data.token}`
+      api.defaults.headers.common.authorization = `Bearer ${response.data.token}`
       setUser({
         token: response.data.token,
         name: response.data.name,

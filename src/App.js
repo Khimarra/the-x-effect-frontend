@@ -1,5 +1,6 @@
 import React from "react"
 import { Switch, Route } from "react-router-dom"
+import './styles/style.css'
 import CardDetail from "./components/CardDetail"
 import EditCard from "./components/EditCard"
 import Login from "./components/Login"

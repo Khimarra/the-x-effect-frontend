@@ -1,4 +1,4 @@
-import Settings from '../src/components/Settings'
+import Settings from '../components/Settings'
 import { api } from './api-auth'
 
 const tryCatchApiCall = async (methodString, urlString, data = null) => {
