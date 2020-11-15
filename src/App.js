@@ -1,5 +1,12 @@
 import React from "react"
 import { Switch, Route } from "react-router-dom"
+import CardDetail from "./components/CardDetail"
+import EditCard from "./components/EditCard"
+import Login from "./components/Login"
+import NewCard from "./components/NewCard"
+import Settings from "./components/Settings"
+import Signup from "./components/Signup"
+import UserHome from "./components/UserHome"
 
 function App() {
   return (
