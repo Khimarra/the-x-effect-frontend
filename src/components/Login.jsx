@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { handleLogin } from "../services/api-auth"
+import UserForm from "./UserForm"
 
 export default function Login(props) {
   const [user, setUser] = useState({ email: "", password: "" })
@@ -19,21 +20,7 @@ export default function Login(props) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="email"
-          placeholder="email"
-          onChange={handleChange}
-        ></input>
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          onChange={handleChange}
-        ></input>
-        <button>Login</button>
-      </form>
+      <UserForm handleChange={handleChange} handleSubmit={handleSubmit} />
     </div>
   )
 }

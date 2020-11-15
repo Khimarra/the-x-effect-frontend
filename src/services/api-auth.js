@@ -46,7 +46,7 @@ export const handleLogin = async ({ email, password }, callback) => {
 
 export const handleSignup = async ({ email, password }, callback) => {
   try {
-    let response = await axios.post(`${apiUrl}users`, {
+    let response = await axios.post(`${apiUrl}signup`, {
       email: email,
       password: password,
     })
