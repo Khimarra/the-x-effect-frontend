@@ -44,6 +44,11 @@ export const editCard = async (cardId, card) => {
   return response
 }
 
+export const editDay = async (cardId, dayId, day) => {
+  let response = await tryCatchApiCall("PUT", `user/cards/${cardId}/days/${dayId}`, day)
+  return response
+}
+
 // export const getSettings = async () => {
 //   let response = await tryCatchApiCall("GET", "user/settings")
 //   return response
