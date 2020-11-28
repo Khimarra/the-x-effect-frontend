@@ -21,8 +21,14 @@ export default function CardDetail(props) {
 
   const handleX = async (e) => {
     console.log(e.target.name)
-    days[e.target.name].success = !days[e.target.name].success
-    let response = await editDay(props.match.params.id, days[e.target.name]._id, days[e.target.name]) 
+    let temp = [...days]
+    temp[e.target.name].success = !temp[e.target.name].success
+    setDays(temp)
+    let response = await editDay(
+      props.match.params.id,
+      temp[e.target.name]._id,
+      temp[e.target.name]
+    )
   }
 
   if (isLoggedIn()) {
@@ -37,10 +43,15 @@ export default function CardDetail(props) {
           <div className="flex flex-wrap w-64 border-2 border-gray-300">
             {days.map((day, index) => (
               <button
+                key={index}
                 name={index}
                 onClick={handleX}
-                className={`flex w-8 h-8 border-2 border-gray-300 ${day.success ? 'bg-teal-600' : 'bg-pink-600'}`}
-              >{day.success.toString()}</button>
+                className={`flex w-8 h-8 border-2 border-gray-300 ${
+                  days[index].success ? "bg-teal-600" : "bg-pink-600"
+                }`}
+              >
+                {day.success.toString()}
+              </button>
             ))}
           </div>
           {/* <ProgressBar /> */}
