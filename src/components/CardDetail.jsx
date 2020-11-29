@@ -61,6 +61,6 @@ export default function CardDetail(props) {
       return <div>Loading...</div>
     }
   } else {
-    ;<Redirect to="/" />
+    <Redirect to="/" />
   }
 }
