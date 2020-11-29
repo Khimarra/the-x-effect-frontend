@@ -16,8 +16,8 @@ export default function UserHome(props) {
 
   const getUserCards = async () => {
     let response = await getCards()
-    console.log(response.data)
-    setCards(response.data)
+    console.log(response && response.data)
+    setCards(response && response.data)
   }
 
   const handleClick = () => {

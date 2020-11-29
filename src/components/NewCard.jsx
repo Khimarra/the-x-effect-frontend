@@ -6,6 +6,12 @@ import DateRangeCal from "./DateRangeCal"
 
 export default function NewCard(props) {
   const [card, setCard] = useState({})
+  const [dates, setDates] = useState({
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    })
+
 
   const handleChange = (e) => {
     setCard({ ...card, [e.target.name]: e.target.value })
@@ -26,6 +32,12 @@ export default function NewCard(props) {
       startDate: ranges.selection.startDate,
       endDate: ranges.selection.endDate
     })
+    // const { startDate, endDate } = ranges.selection
+    setDates({
+      startDate: ranges.selection.startDate,
+      endDate: ranges.selection.endDate,
+      key: 'selection'
+    })
   }
 
   if (isLoggedIn()) {
@@ -44,7 +56,7 @@ export default function NewCard(props) {
             placeholder="description"
             onChange={handleChange}
           ></input>
-          <DateRangeCal handleSelect={handleSelect} />
+          <DateRangeCal dates={dates} handleSelect={handleSelect} />
           <button>Create Card</button>
         </form>
       </div>
