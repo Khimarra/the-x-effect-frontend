@@ -22,7 +22,10 @@ export default function NewCard(props) {
     e.preventDefault()
     let response = await newCard(card)
     console.log(response)
-    props.history.push(`/cards/${response.data._id}`)
+    setTimeout(() => {
+      console.log("Hello, World!")
+      props.history.push(`/cards/${response.data._id}`)
+    }, 500)
   }
 
   const handleSelect = (ranges) => {
@@ -32,7 +35,6 @@ export default function NewCard(props) {
       startDate: ranges.selection.startDate,
       endDate: ranges.selection.endDate
     })
-    // const { startDate, endDate } = ranges.selection
     setDates({
       startDate: ranges.selection.startDate,
       endDate: ranges.selection.endDate,

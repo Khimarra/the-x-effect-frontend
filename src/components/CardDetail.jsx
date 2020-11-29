@@ -47,10 +47,9 @@ export default function CardDetail(props) {
                 name={index}
                 onClick={handleX}
                 className={`flex w-8 h-8 border-2 border-gray-300 ${
-                  days[index].success ? "bg-teal-600" : "bg-pink-600"
+                  days[index].success ? "bg-teal-600" : "bg-purple-600"
                 }`}
               >
-                {day.success.toString()}
               </button>
             ))}
           </div>
