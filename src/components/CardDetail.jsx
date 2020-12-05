@@ -1,16 +1,16 @@
+import { isToday } from "date-fns/esm"
 import React, { useEffect, useState } from "react"
 import { Link, Redirect } from "react-router-dom"
 import { isLoggedIn } from "../services/api-auth"
 import { getCard, editDay } from "../services/api-helper"
-
-// assign start date as "date"
-// for each square, add one to date
 
 export default function CardDetail(props) {
   const [card, setCard] = useState(null)
   const [days, setDays] = useState([])
   let date
   let today = new Date()
+  today.setHours(0, 0, 0, 0)
+  let successColor = "bg-green-400"
 
   useEffect(() => {
     loadCard()
@@ -39,6 +39,8 @@ export default function CardDetail(props) {
   if (isLoggedIn()) {
     if (card) {
       date = new Date(card.startDate)
+      date.setDate(date.getDate() - 1)
+      console.log(date.getTime() === today.getTime())
       return (
         <div>
           <Link to="/">
@@ -46,17 +48,28 @@ export default function CardDetail(props) {
           </Link>
           <div>{card.title}</div>
           <div>{card.description}</div>
-          <div>{`${date}`}</div>
-          <div className="flex flex-wrap w-64 border-2 border-gray-300">
+          <div className=" w-64 grid grid-cols-7 border-2 border-gray-300">
             {days.map((day, index) => {
               date.setDate(date.getDate() + 1)
               return (
                 <button
                   key={index}
                   name={index}
-                  onClick={handleX}
-                  className={`flex w-8 h-8 border-2 border-gray-300 ${
-                    days[index].success ? "bg-teal-600" : "bg-purple-600"
+                  onClick={date.getTime() === today.getTime() ? handleX : ""}
+                  disabled={date.getTime() === today.getTime() ? false : true}
+                  style={
+                    date.getTime() === today.getTime()
+                      ? null
+                      : { cursor: "default" }
+                  }
+                  className={`h-10 border-2 border-gray-300 ${
+                    days[index].success
+                      ? "bg-green-500"
+                      : date.getTime() === today.getTime()
+                      ? "bg-white border-green-500 border-4"
+                      : date.getTime() > today.getTime()
+                      ? "bg-gray-200"
+                      : "bg-white"
                   }`}
                 ></button>
               )
