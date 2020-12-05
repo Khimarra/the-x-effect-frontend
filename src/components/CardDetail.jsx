@@ -3,9 +3,14 @@ import { Link, Redirect } from "react-router-dom"
 import { isLoggedIn } from "../services/api-auth"
 import { getCard, editDay } from "../services/api-helper"
 
+// assign start date as "date"
+// for each square, add one to date
+
 export default function CardDetail(props) {
   const [card, setCard] = useState(null)
   const [days, setDays] = useState([])
+  let date
+  let today = new Date()
 
   useEffect(() => {
     loadCard()
@@ -33,6 +38,7 @@ export default function CardDetail(props) {
 
   if (isLoggedIn()) {
     if (card) {
+      date = new Date(card.startDate)
       return (
         <div>
           <Link to="/">
@@ -40,18 +46,21 @@ export default function CardDetail(props) {
           </Link>
           <div>{card.title}</div>
           <div>{card.description}</div>
+          <div>{`${date}`}</div>
           <div className="flex flex-wrap w-64 border-2 border-gray-300">
-            {days.map((day, index) => (
-              <button
-                key={index}
-                name={index}
-                onClick={handleX}
-                className={`flex w-8 h-8 border-2 border-gray-300 ${
-                  days[index].success ? "bg-teal-600" : "bg-purple-600"
-                }`}
-              >
-              </button>
-            ))}
+            {days.map((day, index) => {
+              date.setDate(date.getDate() + 1)
+              return (
+                <button
+                  key={index}
+                  name={index}
+                  onClick={handleX}
+                  className={`flex w-8 h-8 border-2 border-gray-300 ${
+                    days[index].success ? "bg-teal-600" : "bg-purple-600"
+                  }`}
+                ></button>
+              )
+            })}
           </div>
           {/* <ProgressBar /> */}
           <button>Delete Card</button>
@@ -61,6 +70,6 @@ export default function CardDetail(props) {
       return <div>Loading...</div>
     }
   } else {
-    <Redirect to="/" />
+    ;<Redirect to="/" />
   }
 }
