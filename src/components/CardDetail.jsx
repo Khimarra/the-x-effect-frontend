@@ -1,11 +1,18 @@
-import { isToday } from "date-fns/esm"
 import React, { useEffect, useState } from "react"
 import { Link, Redirect } from "react-router-dom"
 import { isLoggedIn } from "../services/api-auth"
 import { getCard, editDay } from "../services/api-helper"
 
+
+// move card grid to new component
+// call cardgrid from here (and eventually from userhome in the map function?)
+// shoudl the list on home have titles? probably... 
+// should cards on list be link to carddetails? also probably.
+// where does state need to be, now?
+
 export default function CardDetail(props) {
-  const [card, setCard] = useState(null)
+  console.log(props)
+  const [card, setCard] = useState(props.card)
   const [days, setDays] = useState([])
   let date
   let today = new Date()
@@ -17,11 +24,15 @@ export default function CardDetail(props) {
   }, [])
 
   const loadCard = async () => {
-    console.log(props)
-    let response = await getCard(props.match.params.id)
-    console.log(response)
-    setCard(response.data)
-    setDays(response.data.days)
+    if (!props.card) {
+      let response = await getCard(props.match.params.id)
+      console.log(response)
+      setCard(response.data)
+      setDays(response.data.days)
+    } else {
+      setCard(props.card)
+      setDays(props.card.days)
+    }
   }
 
   const handleX = async (e) => {
