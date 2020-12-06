@@ -6,6 +6,8 @@ import CardList from './CardList'
 import Login from './Login'
 import Signup from './Signup'
 
+// should create navbar component to handle home and logout buttons
+
 export default function UserHome(props) {
 
   const [cards, setCards] = useState([])
@@ -29,10 +31,10 @@ export default function UserHome(props) {
   if (isLoggedIn()) {
     return (
       <div>
-        Welcome to X-Effect! 
-        (insert description)
-        <Link to='/newcard'>
-          <button>Add Card</button>
+        <div>Welcome to X-Effect!</div>
+        <div>(insert description)</div>
+        <Link to="/newcard">
+          <button>Create New Card</button>
         </Link>
         <CardList cards={cards} />
         <button onClick={handleClick}>Logout</button>
