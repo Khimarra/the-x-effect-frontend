@@ -22,7 +22,7 @@ export default function CardGrid({ card, days, setDays }) {
 
   return (
     <div>
-      <div className=" w-64 grid grid-cols-7 border-2 border-gray-300">
+      <div className="w-64 grid grid-cols-7 bg-gray-300 border-2 border-gray-300">
         {days.map((day, index) => {
           date.setDate(date.getDate() + 1)
           return (
@@ -38,12 +38,16 @@ export default function CardGrid({ card, days, setDays }) {
               }
               className={`h-10 border-2 border-gray-300 ${
                 days[index].success
-                  ? "bg-green-500"
+                  ? "bg-green-400"
                   : date.getTime() === today.getTime()
-                  ? "bg-white border-green-500 border-4"
+                  ? "bg-white"
                   : date.getTime() > today.getTime()
                   ? "bg-gray-200"
                   : "bg-white"
+              } ${
+                date.getTime() === today.getTime()
+                  ? "border-green-500 border-4"
+                  : ""
               }`}
             ></button>
           )

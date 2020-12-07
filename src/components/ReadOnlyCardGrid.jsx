@@ -9,26 +9,33 @@ export default function ReadOnlyCardGrid({ card, days }) {
   date.setDate(date.getDate() - 1)
 
   return (
-    <div>
-      <div className=" w-64 grid grid-cols-7 border-2 border-gray-300">
-        {days.map((day, index) => {
-          date.setDate(date.getDate() + 1)
-          return (
-            <div
-              key={index}
-              name={index}
-              className={`h-10 border-2 border-gray-300 ${
-                days[index].success
-                  ? "bg-green-500"
-                  : date.getTime() === today.getTime()
-                  ? "bg-white border-green-500 border-4"
-                  : date.getTime() > today.getTime()
-                  ? "bg-gray-200"
-                  : "bg-white"
-              }`}
-            ></div>
-          )
-        })}
+    <div className="flex flex-col">
+      <div className="m-auto">
+        <div>{card.title}</div>
+        <div className="w-64 grid grid-cols-7 bg-gray-300 border-2 border-gray-300">
+          {days.map((day, index) => {
+            date.setDate(date.getDate() + 1)
+            return (
+              <div
+                key={index}
+                name={index}
+                className={`h-10 border-2 border-gray-300 ${
+                  days[index].success
+                    ? "bg-green-400"
+                    : date.getTime() === today.getTime()
+                    ? "bg-white"
+                    : date.getTime() > today.getTime()
+                    ? "bg-gray-200"
+                    : "bg-white"
+                } ${
+                  date.getTime() === today.getTime()
+                    ? "border-green-500 border-4"
+                    : ""
+                }`}
+              ></div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

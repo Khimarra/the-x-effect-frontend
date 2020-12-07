@@ -36,42 +36,22 @@ export default function CardDetail(props) {
     if (card) {
       
       return (
-        <div>
-          <Link to="/">
-            <button>Home</button>
+        <div className="p-5 flex flex-col">
+          <Link to="/" className="text-indigo-700 my-5">
+            Home
           </Link>
-          <div>{card.title}</div>
-          <div>{card.description}</div>
-          <CardGrid card={card} days={days} setDays={setDays} />
-          {/* <div className=" w-64 grid grid-cols-7 border-2 border-gray-300">
-            {days.map((day, index) => {
-              date.setDate(date.getDate() + 1)
-              return (
-                <button
-                  key={index}
-                  name={index}
-                  onClick={date.getTime() === today.getTime() ? handleX : null}
-                  disabled={date.getTime() === today.getTime() ? false : true}
-                  style={
-                    date.getTime() === today.getTime()
-                      ? null
-                      : { cursor: "default" }
-                  }
-                  className={`h-10 border-2 border-gray-300 ${
-                    days[index].success
-                      ? "bg-green-500"
-                      : date.getTime() === today.getTime()
-                      ? "bg-white border-green-500 border-4"
-                      : date.getTime() > today.getTime()
-                      ? "bg-gray-200"
-                      : "bg-white"
-                  }`}
-                ></button>
-              )
-            })}
-          </div> */}
+          <div className="m-auto">
+            <div className="py-2 text-3xl">{card.title}</div>
+            <div className="py-2">{card.description}</div>
+            <CardGrid card={card} days={days} setDays={setDays} />
+          </div>
           {/* <ProgressBar /> */}
-          <button>Delete Card</button>
+          <button className="mx-auto my-5 bg-indigo-500 border-b-4 border-r-4 border-indigo-700 p-3 rounded-lg text-white">
+            Edit Card
+          </button>
+          <button className="mx-auto my-5 bg-indigo-500 border-b-4 border-r-4 border-indigo-700 p-3 rounded-lg text-white">
+            Delete Card
+          </button>
         </div>
       )
     } else {
