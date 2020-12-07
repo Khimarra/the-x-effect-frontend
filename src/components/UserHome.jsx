@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import { isLoggedIn, logout } from '../services/api-auth'
 import { getCards } from '../services/api-helper'
 import CardList from './CardList'
-import Login from './Login'
-import Signup from './Signup'
 
 // should create navbar component to handle home and logout buttons
 
@@ -18,7 +16,6 @@ export default function UserHome(props) {
 
   const getUserCards = async () => {
     let response = await getCards()
-    console.log(response && response.data)
     setCards(response && response.data)
   }
 
@@ -46,8 +43,8 @@ export default function UserHome(props) {
       <div>
         Welcome to X-Effect!
         (insert description)
-        <Login {...props} />
-        <Signup {...props} />
+        <Link to='/login'><button>Login</button></Link>
+        <Link to='/signup'><button>Sign Up</button></Link>
       </div>
     )
   }

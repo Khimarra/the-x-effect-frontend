@@ -66,7 +66,6 @@ export const handleSignup = async ({ email, password }, callback) => {
 export const isLoggedIn = () => {
   const user = getLoggedInUser()
   api.defaults.headers.common.authorization = `Bearer ${user.token}`
-  console.log(user.token)
   return !!user.token
 }
 

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Link, Redirect } from "react-router-dom"
 import { isLoggedIn } from "../services/api-auth"
-import { getCard, editDay } from "../services/api-helper"
+import { getCard } from "../services/api-helper"
+import CardGrid from "./CardGrid"
 
 
 // move card grid to new component
@@ -11,12 +12,9 @@ import { getCard, editDay } from "../services/api-helper"
 // where does state need to be, now?
 
 export default function CardDetail(props) {
-  console.log(props)
   const [card, setCard] = useState(props.card)
   const [days, setDays] = useState([])
-  let date
-  let today = new Date()
-  today.setHours(0, 0, 0, 0)
+
   let successColor = "bg-green-400"
 
   useEffect(() => {
@@ -26,7 +24,6 @@ export default function CardDetail(props) {
   const loadCard = async () => {
     if (!props.card) {
       let response = await getCard(props.match.params.id)
-      console.log(response)
       setCard(response.data)
       setDays(response.data.days)
     } else {
@@ -35,23 +32,9 @@ export default function CardDetail(props) {
     }
   }
 
-  const handleX = async (e) => {
-    console.log(e.target.name)
-    let temp = [...days]
-    temp[e.target.name].success = !temp[e.target.name].success
-    setDays(temp)
-    let response = await editDay(
-      props.match.params.id,
-      temp[e.target.name]._id,
-      temp[e.target.name]
-    )
-  }
-
   if (isLoggedIn()) {
     if (card) {
-      date = new Date(card.startDate)
-      date.setDate(date.getDate() - 1)
-      console.log(date.getTime() === today.getTime())
+      
       return (
         <div>
           <Link to="/">
@@ -59,14 +42,15 @@ export default function CardDetail(props) {
           </Link>
           <div>{card.title}</div>
           <div>{card.description}</div>
-          <div className=" w-64 grid grid-cols-7 border-2 border-gray-300">
+          <CardGrid card={card} days={days} setDays={setDays} />
+          {/* <div className=" w-64 grid grid-cols-7 border-2 border-gray-300">
             {days.map((day, index) => {
               date.setDate(date.getDate() + 1)
               return (
                 <button
                   key={index}
                   name={index}
-                  onClick={date.getTime() === today.getTime() ? handleX : ""}
+                  onClick={date.getTime() === today.getTime() ? handleX : null}
                   disabled={date.getTime() === today.getTime() ? false : true}
                   style={
                     date.getTime() === today.getTime()
@@ -85,7 +69,7 @@ export default function CardDetail(props) {
                 ></button>
               )
             })}
-          </div>
+          </div> */}
           {/* <ProgressBar /> */}
           <button>Delete Card</button>
         </div>
