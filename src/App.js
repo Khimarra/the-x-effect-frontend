@@ -11,7 +11,7 @@ import UserHome from "./components/UserHome"
 
 function App() {
   return (
-    <div className="App">
+    <div className="App min-h-screen bg-indigo-100">
       <Switch>
         {/* user routes */}
         <Route exact path="/" render={(props) => <UserHome {...props} />} />
