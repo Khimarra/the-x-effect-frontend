@@ -1,17 +1,17 @@
 import React, { useState } from "react"
-import { Redirect } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { isLoggedIn } from "../services/api-auth"
 import { newCard } from "../services/api-helper"
+import Button from "./Button"
 import DateRangeCal from "./DateRangeCal"
 
 export default function NewCard(props) {
   const [card, setCard] = useState({})
   const [dates, setDates] = useState({
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    })
-
+    startDate: new Date(),
+    endDate: new Date(),
+    key: "selection",
+  })
 
   const handleChange = (e) => {
     setCard({ ...card, [e.target.name]: e.target.value })
@@ -29,40 +29,71 @@ export default function NewCard(props) {
     setCard({
       ...card,
       startDate: ranges.selection.startDate,
-      endDate: ranges.selection.endDate
+      endDate: ranges.selection.endDate,
     })
     setDates({
       startDate: ranges.selection.startDate,
       endDate: ranges.selection.endDate,
-      key: 'selection'
+      key: "selection",
     })
   }
 
   if (isLoggedIn()) {
     return (
-      <div>
-        <form onSubmit={createCard}>
+      <div className="flex flex-col p-5">
+        <Link to="/" className="text-indigo-700">
+          Home
+        </Link>
+        <div className="text-3xl my-5 text-indigo-700">Create a card</div>
+        <ul className="text-xl pb-5">
+          Tips:
+          <li className="text-base pl-3">
+            Set a duration of at least 14 days to form new habits
+          </li>
+          <li className="text-base pl-3">
+            Start small, one card is better than none
+          </li>
+          <li className="text-base pl-3">One habit per card</li>
+          <li className="text-base pl-3">Think in minutes, not hours</li>
+          <li className="text-base pl-3">
+            Daily goals are a starting point, not a limit
+          </li>
+          <li className="text-base pl-3">
+            Updating the card is part of the daily habit
+          </li>
+        </ul>
+        <ul className="text-xl pb-5">
+          Example daily goals:
+          <li className="text-base pl-3">Meditate for 1 minute</li>
+          <li className="text-base pl-3">Draw for 10 minutes</li>
+          <li className="text-base pl-3">Complete one code challenge</li>
+        </ul>
+
+        <form onSubmit={createCard} className="flex flex-col">
+          Card Title:
           <input
             type="text"
             name="title"
-            placeholder="title"
+            placeholder="Example: Meditation"
             onChange={handleChange}
+            className="mb-5 p-1 px-2"
           ></input>
-          <input
-            type="text"
+          Description:
+          <textarea
             name="description"
-            placeholder="description"
+            rows="4"
+            placeholder="Write out the specific goal. Example: Sit quietly and focus on breath for at least one minute per day, for 50 days."
             onChange={handleChange}
-          ></input>
+            className="mb-5 p-1 px-2"
+          ></textarea>
           <DateRangeCal dates={dates} handleSelect={handleSelect} />
-          <button>Create Card</button>
+          <div className="m-auto">
+            <Button text={"Create Card"} className="m-auto" />
+          </div>
         </form>
       </div>
     )
-
   } else {
-    return (
-      <Redirect to='/' />
-    )
+    return <Redirect to="/" />
   }
 }

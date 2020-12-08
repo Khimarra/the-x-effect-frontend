@@ -1,23 +1,30 @@
 import React from "react"
+import Button from "./Button"
 
 export default function UserForm(props) {
   return (
-    <form onSubmit={props.handleSubmit}>
-      <input
-        type="text"
-        name="email"
-        placeholder="email"
-        onChange={props.handleChange}
-      ></input>
-      <input
-        type="password"
-        name="password"
-        placeholder="password"
-        onChange={props.handleChange}
-      ></input>
-      <button className="bg-indigo-500 border-b-4 border-r-4 border-indigo-700 p-3 rounded-lg text-white">
-        {props.button}
-      </button>
-    </form>
+    <div className="p-5">
+      <div className="text-3xl pb-5 text-indigo-700">Account {props.button}</div>
+
+      <form onSubmit={props.handleSubmit} className="flex flex-col">
+        Email:
+        <input
+          type="email"
+          name="email"
+          placeholder="email"
+          onChange={props.handleChange}
+        ></input>
+        Password:
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          onChange={props.handleChange}
+        ></input>
+        <div className="m-auto">
+          <Button text={`${props.button}`} />
+        </div>
+      </form>
+    </div>
   )
 }

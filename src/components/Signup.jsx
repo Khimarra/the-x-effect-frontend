@@ -18,7 +18,11 @@ export default function Signup(props) {
 
   return (
     <div>
-      <UserForm handleChange={handleChange} handleSubmit={handleSubmit} button='Sign Up' />
+      <UserForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        button="Sign Up"
+      />
     </div>
   )
 }
