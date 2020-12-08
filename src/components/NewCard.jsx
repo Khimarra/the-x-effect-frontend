@@ -15,21 +15,17 @@ export default function NewCard(props) {
 
   const handleChange = (e) => {
     setCard({ ...card, [e.target.name]: e.target.value })
-    console.log(e.target.value)
   }
 
   const createCard = async (e) => {
     e.preventDefault()
     let response = await newCard(card)
-    console.log(response)
     setTimeout(() => {
-      console.log("Hello, World!")
       props.history.push(`/cards/${response.data._id}`)
     }, 500)
   }
 
   const handleSelect = (ranges) => {
-    console.log(ranges)
     setCard({
       ...card,
       startDate: ranges.selection.startDate,

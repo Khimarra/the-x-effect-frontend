@@ -15,15 +15,6 @@ export const getProfile = async () => {
   return response
 }
 
-// export const getProfile = async () => {
-//   try {
-//     const response = await api.get('/user/profile')
-//     return response
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
 export const getCards = async () => {
   let response = await tryCatchApiCall("GET", "user/cards")
   return response
@@ -48,11 +39,6 @@ export const editDay = async (cardId, dayId, day) => {
   let response = await tryCatchApiCall("PUT", `user/cards/${cardId}/days/${dayId}`, day)
   return response
 }
-
-// export const getSettings = async () => {
-//   let response = await tryCatchApiCall("GET", "user/settings")
-//   return response
-// }
 
 export const editProfile = async (settings) => {
   let response = await tryCatchApiCall("PUT", `user/profile/edit`, settings)

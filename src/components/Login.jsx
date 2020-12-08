@@ -7,12 +7,10 @@ export default function Login(props) {
 
   const handleChange = (e) => {
     setUser({...user, [e.target.name]: e.target.value })
-    console.log(e.target.value)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(user)
     handleLogin(user, () => {
       props.history.push('/')
     })
