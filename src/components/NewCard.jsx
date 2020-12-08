@@ -8,11 +8,10 @@ import DateRangeCal from "./DateRangeCal"
 export default function NewCard(props) {
   const [card, setCard] = useState({})
   const [dates, setDates] = useState({
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    })
-
+    startDate: new Date(),
+    endDate: new Date(),
+    key: "selection",
+  })
 
   const handleChange = (e) => {
     setCard({ ...card, [e.target.name]: e.target.value })
@@ -30,18 +29,18 @@ export default function NewCard(props) {
     setCard({
       ...card,
       startDate: ranges.selection.startDate,
-      endDate: ranges.selection.endDate
+      endDate: ranges.selection.endDate,
     })
     setDates({
       startDate: ranges.selection.startDate,
       endDate: ranges.selection.endDate,
-      key: 'selection'
+      key: "selection",
     })
   }
 
   if (isLoggedIn()) {
     return (
-      <div className='p-5'>
+      <div className="flex flex-col p-5">
         <Link to="/" className="text-indigo-700">
           Home
         </Link>
@@ -77,7 +76,7 @@ export default function NewCard(props) {
             name="title"
             placeholder="Example: Meditation"
             onChange={handleChange}
-            className="mb-5"
+            className="mb-5 p-1 px-2"
           ></input>
           Description:
           <textarea
@@ -85,20 +84,16 @@ export default function NewCard(props) {
             rows="4"
             placeholder="Write out the specific goal. Example: Sit quietly and focus on breath for at least one minute per day, for 50 days."
             onChange={handleChange}
-            className="mb-5"
+            className="mb-5 p-1 px-2"
           ></textarea>
           <DateRangeCal dates={dates} handleSelect={handleSelect} />
-          <Link to="/">
-            <Button text={"Cancel"} />
-          </Link>
-          <Button text={"Create Card"} />
+          <div className="m-auto">
+            <Button text={"Create Card"} className="m-auto" />
+          </div>
         </form>
       </div>
     )
-
   } else {
-    return (
-      <Redirect to='/' />
-    )
+    return <Redirect to="/" />
   }
 }

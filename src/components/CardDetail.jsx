@@ -31,8 +31,8 @@ export default function CardDetail(props) {
           <Link to="/" className="text-indigo-700">
             Home
           </Link>
-          <div className="m-auto">
-            <div className="py-2 text-3xl">{card.title}</div>
+          <div className="m-auto p-5">
+            <div className="py-2 text-3xl text-indigo-700">{card.title}</div>
             <div className="py-2">{card.description}</div>
             <div className="flex flex-col items-center">
               <CardGrid card={card} days={days} setDays={setDays} />

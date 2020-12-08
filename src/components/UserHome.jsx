@@ -28,8 +28,8 @@ export default function UserHome(props) {
 
   if (isLoggedIn()) {
     return (
-      <div className="p-5">
-        <button onClick={handleClick} className="text-indigo-700">
+      <div className="flex flex-col p-5">
+        <button onClick={handleClick} className="text-indigo-700 w-full text-right">
           Logout
         </button>
         <Welcome />
