@@ -6,8 +6,6 @@ import Button from "./Button"
 import CardList from "./CardList"
 import Welcome from "./Welcome"
 
-// should create navbar component to handle home and logout buttons
-
 export default function UserHome(props) {
   const [cards, setCards] = useState([])
 

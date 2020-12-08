@@ -6,19 +6,23 @@ export default function Login(props) {
   const [user, setUser] = useState({ email: "", password: "" })
 
   const handleChange = (e) => {
-    setUser({...user, [e.target.name]: e.target.value })
+    setUser({ ...user, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     handleLogin(user, () => {
-      props.history.push('/')
+      props.history.push("/")
     })
   }
 
   return (
     <div>
-      <UserForm handleChange={handleChange} handleSubmit={handleSubmit} button='Login' />
+      <UserForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        button="Login"
+      />
     </div>
   )
 }
